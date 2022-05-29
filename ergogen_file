@@ -34,22 +34,72 @@ points:
           stagger: 0
           spread: cx
           rotate: 36
+          rows:
+            bottom:
+             bind: [0,0,0,0]
+             column_net: P9
+            middle:
+              bind: [0,0,0,0]
+              column_net: P9
+            top:
+              bind: [0,2,0,0]
+              column_net: P9
         ring:
           stagger: 8
           spread: cx+7
           rotate: -24
+          rows:
+            bottom:
+             bind: [0,0,0,15]
+             column_net: P9
+            middle:
+              bind: [0,0,0,18]
+              column_net: P9
+            top:
+              bind: [0,0,0,0]
+              column_net: P9
         middle: 
           stagger: 5
           spread: cx+5
           rotate: -10
+          rows:
+            bottom:
+             bind: [0,0,0,10]
+             column_net: P9
+            middle:
+              bind: [0,0,0,11]
+              column_net: P9
+            top:
+              bind: [0,0,0,12]
+              column_net: P9
         inner:
           stagger: -8
           spread: cx+5
           rotate: -2
+          rows:
+            bottom:
+             bind: [0,0,0,10]
+             column_net: P9
+            middle:
+              bind: [0,0,0,10]
+              column_net: P9
+            top:
+              bind: [0,0,0,10]
+              column_net: P9
         innest:
           stagger: -3
           spread: cx
           rotate: 0
+          rows:
+            bottom:
+             bind: [0,0,0,10]
+             column_net: P9
+            middle:
+              bind: [0,0,0,10]
+              column_net: P9
+            top:
+              bind: [0,0,0,10]
+              column_net: P9
     thumb:
       anchor:
         ref: main_innest_bottom
@@ -61,12 +111,24 @@ points:
         tinner:
           stagger: 0
           spread: cx
+          rows:
+            tbottom:
+             bind: [12,5,0,0]
+             column_net: P9
         touter:
           stagger: 0
           spread: cx 
+          rows:
+            tbottom:
+             bind: [0,5,0,0]
+             column_net: P9
         toutest:
           stagger: 0
           spread: cx
+          rows:
+            tbottom:
+             bind: [0,0,0,0]
+             column_net: P9
 outlines:
   exports:
     raw: 
@@ -74,11 +136,30 @@ outlines:
         side: left
         size: [1cx - 0.5 , 1cx -0.5]
       - type: rectangle
-        size: [96.5, 40]
+        size: [22, 54]
         anchor:
-          ref: main_inner_middle
-          rotate: -25
-          shift: [-49.5, -12]
+          ref: main_innest_bottom
+          rotate: 0
+          shift: [6, -40]
+      - type: rectangle
+        size: [45, 78]
+        anchor:
+          ref: main_innest_bottom
+          rotate: 90
+          shift: [-1, -28]  
+    boards:
+      - type: rectangle
+        size: [18, 34]
+        anchor:
+          ref: main_innest_bottom
+          rotate: 0
+          shift: [10, -20]
+      - type: rectangle
+        size: [18, 34]
+        anchor:
+          ref: main_innest_bottom
+          rotate: 90
+          shift: [-25, -28]    
     cutout:
       - type: outline
         name: raw
@@ -88,7 +169,45 @@ outlines:
         side: left
         size: [1cx - 0.5, 1cy - 0.5] # Choc keycaps are 17.5 x 16.5
         bound: false    
-        tags: [1u]          
-
-      
+        tags: [1u]     
+    cap_board:
+      [keycap_outlines, boards] 
+pcbs:
+  shawboard:
+    outlines:
+      board:
+        outline: cutout
+      keycaps:
+        outline: keycap_outlines
+        layer: Eco1.User
+    footprints:
+      promicro:
+        type: promicro_pretty
+        anchor:
+          ref: main_innest_bottom
+          shift: [19, -5]
+          rotate: 270
+      pcm12:
+        type: pcm12
+        anchor:
+          ref: thumb_tinner_tbottom
+          shift: [-28, -13.5]
+          rotate: -110
+        nets:
+          from: pos  
+          to: RAW
+        params:
+          reverse: true 
+      b3u1000p:
+        type: b3u1000p
+        nets:
+          r1: RST  
+          r2: GND
+        anchor:
+          ref: thumb_tinner_tbottom
+          shift: [-14, 23]
+          rotate: -110
+        params:
+          reverse: true 
+     
 
